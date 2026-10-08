@@ -23,7 +23,26 @@ This will only persist until Peer Pressure runs an update, in which case, you wi
 
 # Disclaimer
 
-This is only for research and development. I do not condone online hacking, cheating, or piracy of any kind.
+This is only for research and development. I do not condone online hacking, cheating, or piracy of any kind. 
+
+PPLoader is also NOT affiliated with GrimDoomer or Peer Pressure in any shape or form and is simply a separate 3rd-party application.
+
+# FAQs
+
+1. Why doesn't 'x' plugin work?
+    * I don't know. Contact the creator of the plugin.
+
+2. Can this load stealth servers?
+    * This is simply a plugin loader. I can't control what this is used for. I do however don't condone the idea of loading stealth servers with PPLoader.
+
+3. Is this a Dashlaunch alternative?
+    * No, this is just a plugin loader.
+
+4. Will this receive updates?
+    * Yes, but on my own time. You are welcome to submit pull requests.
+
+5. Why doesn't this have 'x' feature?
+    * This is just a plugin loader, nothing else.
 
 # License Notice
 
