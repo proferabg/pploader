@@ -8,6 +8,10 @@ Just a simple plugin loader + installer for sysdll plugin loading on Peer Pressu
 2. Download the [Latest Release](https://github.com/proferabg/pploader/releases/latest)
 3. Extract the Content folder onto the root of a USB or HDD and launch `PPLoader Installer` on the Xbox 360
 
+# Usage
+
+It will load plugins contained in pploader.ini from HDD or USB root.
+
 # Known Bugs
 
 1. XBDM has been patched to load without Dashlaunch and is not fully working, this will be addressed in the future.
