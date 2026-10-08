@@ -53,29 +53,29 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Xbox 360'">
     <LinkIncremental>true</LinkIncremental>
     <RemoteRoot>hdd:\</RemoteRoot>
-    <ImageXexOutput>$(SolutionDir)Build\pploader\pploader.xex</ImageXexOutput>
-    <OutDir>$(SolutionDir)\Build\pploader\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)\Build\pploader\$(Configuration)\</IntDir>
+    <ImageXexOutput>$(ProjectDir)..\Build\pploader\pploader.xex</ImageXexOutput>
+    <OutDir>$(ProjectDir)..\Build\pploader\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)..\Build\pploader\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Xbox 360'">
     <LinkIncremental>false</LinkIncremental>
-    <ImageXexOutput>$(SolutionDir)Build\pploader\pploader.xex</ImageXexOutput>
-    <OutDir>$(SolutionDir)\Build\pploader\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)\Build\pploader\$(Configuration)\</IntDir>
+    <ImageXexOutput>$(ProjectDir)..\Build\pploader\pploader.xex</ImageXexOutput>
+    <OutDir>$(ProjectDir)..\Build\pploader\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)..\Build\pploader\$(Configuration)\</IntDir>
     <RemoteRoot>hdd:\</RemoteRoot>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_LTCG|Xbox 360'">
     <LinkIncremental>false</LinkIncremental>
-    <ImageXexOutput>$(SolutionDir)Build\pploader\pploader.xex</ImageXexOutput>
-    <OutDir>$(SolutionDir)\Build\pploader\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)\Build\pploader\$(Configuration)\</IntDir>
+    <ImageXexOutput>$(ProjectDir)..\Build\pploader\pploader.xex</ImageXexOutput>
+    <OutDir>$(ProjectDir)..\Build\pploader\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)..\Build\pploader\$(Configuration)\</IntDir>
     <RemoteRoot>hdd:\</RemoteRoot>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Xbox 360'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DebugInformationFormat />
       <Optimization>Disabled</Optimization>
       <ExceptionHandling>false</ExceptionHandling>
       <MinimalRebuild>true</MinimalRebuild>
@@ -87,8 +87,7 @@
       <AssemblerOutput>All</AssemblerOutput>
     </ClCompile>
     <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>C:\Symbols\pploader.pdb</ProgramDatabaseFile>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
       <AdditionalDependencies>xapilibd.lib;xboxkrnl.lib</AdditionalDependencies>
       <AdditionalOptions>/ignore:4098 /dll /entry:"_DllMainCRTStartup" /include:"XboxKrnlBuildNumber" /ALIGN:128,4096 %(AdditionalOptions)</AdditionalOptions>
       <ShowProgress>LinkVerbose</ShowProgress>
@@ -112,7 +111,7 @@
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <StringPooling>true</StringPooling>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DebugInformationFormat />
       <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
       <ExceptionHandling>false</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
@@ -122,10 +121,9 @@
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <ProgramDatabaseFile>C:/Symbols/pploader.pdb</ProgramDatabaseFile>
       <SetChecksum>true</SetChecksum>
       <AdditionalDependencies>xapilib.lib;xboxkrnl.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>
@@ -139,10 +137,12 @@
     </ImageXex>
     <Deploy>
       <Progress>true</Progress>
+      <ExcludedFromBuild>true</ExcludedFromBuild>
     </Deploy>
     <Deploy>
       <ForceCopy>true</ForceCopy>
       <DeploymentType>CopyToHardDrive</DeploymentType>
+      <ExcludedFromBuild>true</ExcludedFromBuild>
     </Deploy>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_LTCG|Xbox 360'">
@@ -152,7 +152,7 @@
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <StringPooling>true</StringPooling>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DebugInformationFormat />
       <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
       <ExceptionHandling>false</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
@@ -165,7 +165,6 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <ProgramDatabaseFile>C:\Symbols\pploader.pdb</ProgramDatabaseFile>
       <SetChecksum>true</SetChecksum>
       <AdditionalDependencies>xapilib.lib;xboxkrnl.lib</AdditionalDependencies>
       <AdditionalOptions>/ignore:4089 /dll /entry:"_DllMainCRTStartup" /include:"XboxKrnlBuildNumber"  /ALIGN:128,4096 %(AdditionalOptions)</AdditionalOptions>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|Xbox 360">
+      <Configuration>Release</Configuration>
+      <Platform>Xbox 360</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{3AB9E126-5A71-4D1F-94C9-4E86DE1FD9A8}</ProjectGuid>
+    <Keyword>MakeFileProj</Keyword>
+    <ProjectName>PPLoaderPkgBuilder</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Xbox 360'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <PlatformToolset>2010-01</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Xbox 360'">
+    <NMakeBuildCommandLine>&quot;$(SystemRoot)\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe&quot; &quot;$(ProjectDir)PPLoaderPkgBuilder.csproj&quot; /t:Build /p:Configuration=Release /p:Platform=AnyCPU /v:minimal &amp;&amp; &quot;$(ProjectDir)..\Build\pkgbuilder\PPLoaderPkgBuilder.exe&quot; &quot;$(ProjectDir)..&quot;</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>&quot;$(SystemRoot)\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe&quot; &quot;$(ProjectDir)PPLoaderPkgBuilder.csproj&quot; /t:Rebuild /p:Configuration=Release /p:Platform=AnyCPU /v:minimal &amp;&amp; &quot;$(ProjectDir)..\Build\pkgbuilder\PPLoaderPkgBuilder.exe&quot; &quot;$(ProjectDir)..&quot;</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>&quot;$(SystemRoot)\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe&quot; &quot;$(ProjectDir)PPLoaderPkgBuilder.csproj&quot; /t:Clean /p:Configuration=Release /p:Platform=AnyCPU /v:minimal</NMakeCleanCommandLine>
+    <NMakeOutput>$(ProjectDir)..\Build\pkgbuilder\PPLoaderPkgBuilder.exe</NMakeOutput>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="PPLoaderPkgBuilder.csproj" />
+    <None Include="Program.cs" />
+    <None Include="lib\X360.dll" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

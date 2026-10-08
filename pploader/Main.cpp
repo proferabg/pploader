@@ -140,7 +140,6 @@ BOOL CreateAliasInNamespace(
 
     NTSTATUS Status = (NTSTATUS)ObCreateSymbolicLink(&LinkName, &DeviceName);
 
-    // A collision means another component already created this exact alias.
     return NT_SUCCESS(Status) || Status == kStatusObjectNameCollision;
 }
 
@@ -342,7 +341,6 @@ VOID ParsePluginIni(CHAR* Buffer, CHAR Plugins[kPluginCount][MAX_PATH]) {
         if (PluginIndex < 0)
             continue;
 
-        // An empty value intentionally disables this slot.
         if (*Value == 0) {
             Plugins[PluginIndex][0] = 0;
             continue;
@@ -358,12 +356,12 @@ DWORD UnloadSelfAndExitThread(DWORD ExitCode) {
     HANDLE ModuleHandle = g_ModuleHandle;
 
     if (ModuleHandle != NULL) {
+        *reinterpret_cast<volatile WORD*>(
+            reinterpret_cast<BYTE*>(ModuleHandle) + 0x40) = 1;
         DbgPrint("[pploader] Unloading\n");
         XexUnloadImageAndExitThread(ModuleHandle, ExitCode);
     }
 
-    // XexUnloadImageAndExitThread normally does not return. Keep a normal
-    // thread return as a safe fallback if no module handle was captured.
     return ExitCode;
 }
 
@@ -378,15 +376,11 @@ BOOL WaitForRuntimeReady() {
 
     (void)Status;
 
-    // Match DashLaunch's firstRunTasks ordering: the USB boot-enumeration
-    // barrier is followed by one second for storage and title startup.
     Sleep(kRuntimeSettleDelayMs);
     return TRUE;
 }
 
 DWORD WINAPI PluginLoaderThread(LPVOID) {
-    // DashLaunch loads plugins after this same boot-enumeration barrier rather
-    // than looking up dash.xex as a named system module.
     if (!WaitForRuntimeReady())
         return UnloadSelfAndExitThread(0);
 
@@ -467,11 +461,12 @@ BOOL StartPluginLoader() {
 
     XSetThreadProcessor(Thread, 4);
     SetThreadPriority(Thread, THREAD_PRIORITY_BELOW_NORMAL);
+    ResumeThread(Thread);
     CloseHandle(Thread);
     return TRUE;
 }
 
-} // anonymous namespace
+}
 
 BOOL APIENTRY DllMain(HANDLE Module, DWORD Reason, LPVOID) {
     if (Reason == DLL_PROCESS_ATTACH) {

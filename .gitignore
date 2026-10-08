@@ -7,6 +7,8 @@
 *.suo
 *.zip
 *.sdf
+*.elf
+*.bin
 
 vendor/
 .vs/
@@ -14,4 +16,4 @@ Debug/
 Release/
 Release_LTCG/
 Build/
-patches/
+obj/

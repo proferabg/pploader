@@ -1,0 +1,3 @@
+[submodule "pkgbuilder/X360"]
+	path = pkgbuilder/X360
+	url = https://github.com/mtolly/X360.git

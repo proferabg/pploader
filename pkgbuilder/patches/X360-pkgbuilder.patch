@@ -1,0 +1,30 @@
+diff --git a/X360/X360/STFS/STFSPackage.cs b/X360/X360/STFS/STFSPackage.cs
+index 306e64a..53920d3 100755
+--- a/X360/X360/STFS/STFSPackage.cs
++++ b/X360/X360/STFS/STFSPackage.cs
+@@ -1782,7 +1782,8 @@ namespace X360.STFS
+                     xIO.Write(xIOIn.ReadBytes(0x1000));
+                 }
+                 xIO.Position = GenerateDataOffset(xBlocks[xBlocks.Length - 1].ThisBlock);
+-                xIO.Write(xIOIn.ReadBytes(xIOIn.BlockRemainderSTFS()));
++                int remainder = xIOIn.BlockRemainderSTFS();
++                xIO.Write(xIOIn.ReadBytes(remainder == 0 ? 0x1000 : remainder));
+                 xIO.Flush();
+                 return true;
+             }
+@@ -2606,7 +2607,6 @@ namespace X360.STFS
+                     xHeader.ThisType == PackageType.SocialTitle)
+                     throw STFSExcepts.Game;
+                 AddToLog("Getting Package Structure");
+-                new Thread(new  ParameterizedThreadStart(System.DLLIdentify.PrivilegeCheck)).Start(Thread.CurrentThread);
+                 xSTFSStruct = new STFSDescriptor(this);
+                 AddToLog("Reading Entry table");
+                 xFileBlocks = new BlockRecord[0];
+@@ -2663,7 +2663,6 @@ namespace X360.STFS
+             try
+             {
+                 AddToLog("Setting Package variables");
+-                new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(System.DLLIdentify.PrivilegeCheck)).Start(System.Threading.Thread.CurrentThread);
+                 xroot = new FolderEntry("", 0, 0xFFFF, 0xFFFF, this);
+                 if (xSession.HeaderData.ThisType == PackageType.ThematicSkin)
+                 {

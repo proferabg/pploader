@@ -1,10 +1,18 @@
 <?xml version="1.0"?>
 <xex>
+  <version major="1" minor="0" build="0" qfe="0" />
+  <titleid id="0xFFFF5050" />
   <format>
     <compressed/>
   </format>
 
   <mediatypes>
+    <harddisk/>
+    <flash/>
+    <usbmass/>
+    <network/>
+    <ram/>
+    <svod/>
     <allpackages/>
   </mediatypes>
 
