@@ -25,7 +25,7 @@ This will only persist until Peer Pressure runs an update, in which case, you wi
 
 This is only for research and development. I do not condone online hacking, cheating, or piracy of any kind. 
 
-PPLoader is also NOT affiliated with GrimDoomer or Peer Pressure in any shape or form and is simply a separate 3rd-party application.
+PPLoader is also NOT affiliated with Grimdoomer or Peer Pressure in any shape or form and is simply a separate 3rd-party application.
 
 # FAQs
 
@@ -49,3 +49,7 @@ PPLoader is also NOT affiliated with GrimDoomer or Peer Pressure in any shape or
 The Xbox 360 loader and installer are covered by the repository's root license.
 
 The `pkgbuilder` component is distributed under the GNU General Public License version 3. It builds DJ SkunkieButt's GPL-3.0 X360 .NET library from the `pkgbuilder/X360` Git submodule at `https://github.com/mtolly/X360`; no prebuilt `X360.dll` is stored in this repository. A small reproducible compatibility patch is applied only while building X360 and the submodule is restored afterward. Its complete license and attribution are in `pkgbuilder/LICENSE-GPL-3.0.txt` and `pkgbuilder/NOTICE.md`.
+
+# Note to Grimdoomer
+
+I'm sorry! I appreciate your work and this was inevitable. If I didn't make this then someone else would.
