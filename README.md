@@ -29,20 +29,23 @@ PPLoader is also NOT affiliated with Grimdoomer or Peer Pressure in any shape or
 
 # FAQs
 
-1. Why doesn't 'x' plugin work?
-    * I don't know. Contact the creator of the plugin.
-
-2. Can this load stealth servers?
+1. Can this load stealth servers?
     * This is simply a plugin loader. I can't control what this is used for. I do however don't condone the idea of loading stealth servers with PPLoader.
 
-3. Is this a Dashlaunch alternative?
+2. Why doesn't 'x' plugin work?
+    * I don't know. Contact the creator of the plugin.
+
+3. Why doesn't this have 'x' feature?
+    * This is just a plugin loader, nothing else.
+
+4. Is this a Dashlaunch alternative?
     * No, this is just a plugin loader.
 
-4. Will this receive updates?
+5. Help, I've bricked my console from a bad plugin?
+    * Copy the clean [pploader.ini](https://github.com/proferabg/pploader/blob/main/pploader/pploader.ini) to the root of a USB, plug it into the console, and boot.
+    
+6. Will this receive updates?
     * Yes, but on my own time. You are welcome to submit pull requests.
-
-5. Why doesn't this have 'x' feature?
-    * This is just a plugin loader, nothing else.
 
 # License Notice
 
