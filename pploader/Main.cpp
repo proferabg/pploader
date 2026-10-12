@@ -29,6 +29,10 @@ extern "C" {
         BOOL Alertable,
         PLARGE_INTEGER Timeout);
 
+    NTSYSAPI ULONG NTAPI MmGetPhysicalAddress(PVOID Address);
+
+    NTSYSAPI VOID NTAPI KeFlushEntireTb();
+
     extern PVOID* UsbdBootEnumerationDoneEvent;
 
     NTSYSAPI HRESULT NTAPI ObCreateSymbolicLink(
@@ -53,6 +57,17 @@ const DWORD kPluginModuleType = 8;
 const DWORD kRuntimeSettleDelayMs = 1000;
 const DWORD kUserRequestWaitReason = 3;
 const DWORD kUserWaitMode = 1;
+const DWORD kHvBackdoorKey = 0x72627472;
+const DWORD kHvMemcpyCommand = 5;
+const DWORD kHvProbeCommand = 0xFF;
+const DWORD kHvProbeResult = 2;
+const ULONGLONG kImagePteTable = 0x0000006801F50000ui64;
+const DWORD kKernelImageBase = 0x80000000;
+const DWORD kKernelWritableStart = 0x80040000;
+const DWORD kKernelWritableEnd = 0x801F0000;
+const DWORD kImagePageSize = 0x10000;
+const DWORD kImagePteSize = sizeof(DWORD);
+const DWORD kImagePteReadOnly = 0x00000001;
 const NTSTATUS kStatusObjectNameCollision = (NTSTATUS)0xC0000035;
 const CHAR kDefaultIniPath[] = "Hdd:\\" PPLOADER_INI_NAME;
 const CHAR kDefaultIniContents[] =
@@ -70,6 +85,71 @@ struct KernelAnsiString {
     USHORT MaximumLength;
     PCHAR Buffer;
 };
+
+#define HvxCall ULONGLONG __declspec(naked)
+
+HvxCall HvxSyscall0Backdoor(
+    DWORD Key,
+    ULONGLONG Command,
+    ULONGLONG Source,
+    ULONGLONG Destination,
+    ULONGLONG Length) {
+    __asm {
+        li r0, 0
+        sc
+        blr
+    }
+}
+
+BOOL MakeKernelWritable(PVOID ScratchBuffer) {
+    const DWORD FirstPage =
+        (kKernelWritableStart - kKernelImageBase) / kImagePageSize;
+    const DWORD PageCount =
+        (kKernelWritableEnd - kKernelWritableStart) / kImagePageSize;
+    const DWORD PteBytes = PageCount * kImagePteSize;
+    const ULONGLONG PteAddress =
+        kImagePteTable + (ULONGLONG)FirstPage * kImagePteSize;
+    const ULONGLONG PhysicalScratch =
+        0x8000000000000000ui64 |
+        (ULONGLONG)(DWORD)MmGetPhysicalAddress(ScratchBuffer);
+
+    ULONGLONG Result = HvxSyscall0Backdoor(
+        kHvBackdoorKey,
+        kHvProbeCommand,
+        0,
+        0,
+        1);
+
+    if ((DWORD)Result != kHvProbeResult)
+        return FALSE;
+
+    Result = HvxSyscall0Backdoor(
+        kHvBackdoorKey,
+        kHvMemcpyCommand,
+        PteAddress,
+        PhysicalScratch,
+        PteBytes);
+
+    if (Result != PhysicalScratch)
+        return FALSE;
+
+    DWORD* Ptes = (DWORD*)ScratchBuffer;
+    for (DWORD Index = 0; Index < PageCount; ++Index)
+        Ptes[Index] &= ~kImagePteReadOnly;
+
+    Result = HvxSyscall0Backdoor(
+        kHvBackdoorKey,
+        kHvMemcpyCommand,
+        PhysicalScratch,
+        PteAddress,
+        PteBytes);
+
+    if (Result != PteAddress)
+        return FALSE;
+
+    KeFlushEntireTb();
+    return TRUE;
+}
 
 CHAR* TrimLeft(CHAR* Text) {
     while (*Text == ' ' || *Text == '\t')
@@ -413,6 +493,14 @@ DWORD WINAPI PluginLoaderThread(LPVOID) {
     CHAR Plugins[kPluginCount][MAX_PATH];
     memset(Plugins, 0, sizeof(Plugins));
     ParsePluginIni(IniBuffer, Plugins);
+
+    DbgPrint("[pploader] Making kernel writable.\n");
+    if (!MakeKernelWritable(IniBuffer)) {
+        DbgPrint("[pploader] Failed to make kernel writable.\n");
+        XPhysicalFree(IniBuffer);
+        return UnloadSelfAndExitThread(0);
+    }
+
     XPhysicalFree(IniBuffer);
 
     for (DWORD Index = 0; Index < kPluginCount; ++Index) {
@@ -448,19 +536,19 @@ BOOL StartPluginLoader() {
     DWORD ThreadId = 0;
     NTSTATUS Status = ExCreateThread(
         &Thread,
-        0,
+        0x10000,
         &ThreadId,
         (PVOID)XapiThreadStartup,
         PluginLoaderThread,
         NULL,
-        0x2);
+        0x2 | CREATE_SUSPENDED);
 
     if (!NT_SUCCESS(Status) || Thread == NULL) {
         return FALSE;
     }
 
     XSetThreadProcessor(Thread, 4);
-    SetThreadPriority(Thread, THREAD_PRIORITY_BELOW_NORMAL);
+    SetThreadPriority(Thread, THREAD_PRIORITY_ABOVE_NORMAL);
     ResumeThread(Thread);
     CloseHandle(Thread);
     return TRUE;
@@ -470,7 +558,7 @@ BOOL StartPluginLoader() {
 
 BOOL APIENTRY DllMain(HANDLE Module, DWORD Reason, LPVOID) {
     if (Reason == DLL_PROCESS_ATTACH) {
-		g_ModuleHandle = Module;
+        g_ModuleHandle = Module;
         StartPluginLoader();
     }
 

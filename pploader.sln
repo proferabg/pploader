@@ -1,5 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.37206.5
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pploader", "pploader\pploader.vcxproj", "{08CE61F5-C3F3-4826-A529-1DC73BEF1482}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PPLoaderInstaller", "installer\PPLoaderInstaller.vcxproj", "{644BB82C-E8B7-41B5-917F-C86C3C0C54A0}"
@@ -37,6 +40,21 @@ Global
 		{08CE61F5-C3F3-4826-A529-1DC73BEF1482}.Release|Xbox 360.ActiveCfg = Release|Xbox 360
 		{08CE61F5-C3F3-4826-A529-1DC73BEF1482}.Release|Xbox 360.Build.0 = Release|Xbox 360
 		{08CE61F5-C3F3-4826-A529-1DC73BEF1482}.Release|Xbox 360.Deploy.0 = Release|Xbox 360
+		{644BB82C-E8B7-41B5-917F-C86C3C0C54A0}.CodeAnalysis|Xbox 360.ActiveCfg = Release|Xbox 360
+		{644BB82C-E8B7-41B5-917F-C86C3C0C54A0}.CodeAnalysis|Xbox 360.Build.0 = Release|Xbox 360
+		{644BB82C-E8B7-41B5-917F-C86C3C0C54A0}.CodeAnalysis|Xbox 360.Deploy.0 = Release|Xbox 360
+		{644BB82C-E8B7-41B5-917F-C86C3C0C54A0}.Debug|Xbox 360.ActiveCfg = Release|Xbox 360
+		{644BB82C-E8B7-41B5-917F-C86C3C0C54A0}.Debug|Xbox 360.Build.0 = Release|Xbox 360
+		{644BB82C-E8B7-41B5-917F-C86C3C0C54A0}.Debug|Xbox 360.Deploy.0 = Release|Xbox 360
+		{644BB82C-E8B7-41B5-917F-C86C3C0C54A0}.Profile_FastCap|Xbox 360.ActiveCfg = Release|Xbox 360
+		{644BB82C-E8B7-41B5-917F-C86C3C0C54A0}.Profile_FastCap|Xbox 360.Build.0 = Release|Xbox 360
+		{644BB82C-E8B7-41B5-917F-C86C3C0C54A0}.Profile_FastCap|Xbox 360.Deploy.0 = Release|Xbox 360
+		{644BB82C-E8B7-41B5-917F-C86C3C0C54A0}.Profile|Xbox 360.ActiveCfg = Release|Xbox 360
+		{644BB82C-E8B7-41B5-917F-C86C3C0C54A0}.Profile|Xbox 360.Build.0 = Release|Xbox 360
+		{644BB82C-E8B7-41B5-917F-C86C3C0C54A0}.Profile|Xbox 360.Deploy.0 = Release|Xbox 360
+		{644BB82C-E8B7-41B5-917F-C86C3C0C54A0}.Release_LTCG|Xbox 360.ActiveCfg = Release|Xbox 360
+		{644BB82C-E8B7-41B5-917F-C86C3C0C54A0}.Release_LTCG|Xbox 360.Build.0 = Release|Xbox 360
+		{644BB82C-E8B7-41B5-917F-C86C3C0C54A0}.Release_LTCG|Xbox 360.Deploy.0 = Release|Xbox 360
 		{644BB82C-E8B7-41B5-917F-C86C3C0C54A0}.Release|Xbox 360.ActiveCfg = Release|Xbox 360
 		{644BB82C-E8B7-41B5-917F-C86C3C0C54A0}.Release|Xbox 360.Build.0 = Release|Xbox 360
 		{3AB9E126-5A71-4D1F-94C9-4E86DE1FD9A8}.CodeAnalysis|Xbox 360.ActiveCfg = Release|Xbox 360

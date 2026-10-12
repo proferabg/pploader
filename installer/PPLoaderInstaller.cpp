@@ -615,7 +615,7 @@ namespace
     void DrawScreen()
     {
         g_console.Clear();
-        g_console.Format("\n  PeerPressure Loader Installer\n");
+        g_console.Format("\n  PPLoader Installer\n");
         g_console.Format("  =============================\n\n");
         g_console.Format("  %s\n\n", g_status.c_str());
 

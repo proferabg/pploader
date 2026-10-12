@@ -32,6 +32,8 @@ namespace PPLoaderPkgBuilder
         {
             string build = Path.Combine(root, "Build");
             string stage = Path.Combine(build, "PPLoaderPackage");
+            if (Directory.Exists(stage))
+                Directory.Delete(stage, true);
             Directory.CreateDirectory(stage);
 
             string rawInstaller = Path.Combine(build, "PPLoaderInstaller", "default.xex");
@@ -72,13 +74,13 @@ namespace PPLoaderPkgBuilder
             header.ThisType = PackageType.GameDemo;
             header.TitleID = 0xFFFF5050;
             header.MediaID = 0x50504C44;
-            header.Version_ = 0x10000000;
-            header.Version_Base = 0x10000000;
+            header.Version_ = 0x11000000;
+            header.Version_Base = 0x11000000;
             header.IDTransfer = TransferLock.AllowTransfer;
             header.SetLanguage(Languages.English);
-            header.Title_Display = "PPLoader Installer";
-            header.Title_Package = "PPLoader Installer";
-            header.Description = "Install, repair, update, or remove the PeerPressure plugin-loader patch.";
+            header.Title_Display = "PPLoader Installer 1.1";
+            header.Title_Package = "PPLoader Installer 1.1";
+            header.Description = "Install, repair, update, or remove the PPLoader patch.";
             header.Publisher = "TooMuchPressure";
 
             byte[] iconBytes = File.ReadAllBytes(icon);
