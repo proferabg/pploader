@@ -50,6 +50,8 @@ namespace
     const char* const kSourceLoader = "game:\\pploader.xex";
     const char* const kTargetXbdm = "Hdd:\\PeerPressure\\xbdm.xex";
     const char* const kTargetLoader = "Hdd:\\PeerPressure\\pploader.xex";
+    const char* const kTargetLoaderNative =
+        "\\Device\\Harddisk0\\Partition1\\PeerPressure\\pploader.xex";
 
     const DWORD kLoaderAddress = 0x801616C4;
     const DWORD kHookAddress = 0x80061414;
@@ -566,7 +568,7 @@ namespace
 
     DWORD WINAPI LoadPPLoaderThread(LPVOID)
     {
-        g_loadStatus = XexLoadImage(kTargetLoader, 8, 0, NULL);
+        g_loadStatus = XexLoadImage(kTargetLoaderNative, 8, 0, NULL);
         g_loadFinished = TRUE;
         return 0;
     }
@@ -715,7 +717,7 @@ void __cdecl main()
                 if (!LoadPPLoaderNow(loadResult))
                 {
                     g_state = StateLoadFailed;
-                    g_status = "Failed to start PPLoader. A reboot is required.";
+                    g_status = loadResult + " A reboot is required.";
                     DrawScreen();
                     Sleep(16);
                     continue;
