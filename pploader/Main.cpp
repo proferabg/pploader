@@ -452,6 +452,7 @@ DWORD WINAPI PluginLoaderThread(LPVOID) {
 }
 
 BOOL StartPluginLoader() {
+    DbgPrint("[pploader] Loader Version 1.2\n");
     HANDLE Thread = NULL;
     DWORD ThreadId = 0;
     NTSTATUS Status = ExCreateThread(
