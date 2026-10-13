@@ -15,7 +15,6 @@ It will load plugins contained in pploader.ini from HDD or USB root.
 # Known Bugs
 
 1. XBDM has been patched to load without Dashlaunch and is not fully working, this will be addressed in the future.
-2. JRPC2 has a race condition and will sometimes halt the console on load, use XDRPC instead.
 
 # Persistence
 
